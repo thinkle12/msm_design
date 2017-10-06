@@ -633,13 +633,3 @@ class Sequence_Optimization:
         elapsedtime = time.time() - starttime 
         print('time = %0.2f' % elapsedtime)
 
-import matplotlib
-matplotlib.use('Agg')    
-        
-opt=Sequence_Optimization(model_file_dir='/home/thinkle2@ad.wisc.edu/package_test/w_amber_nopair//',
-    wt_seq='MQIFVKTLTGKTITLEVEPSDTIENVKAKIQDKEGIPPDQQRLIFAGKQLEDGRTLSDYNIQKESTLHLVLRLRGG',
-    sequence_alignment_file='/home/thinkle2@ad.wisc.edu/package_test/smallalignment.txt',reduce_alignment=2)
-    
-So = opt.single_state_design([x for x in range(100) if x!=45 and x!=98],plot_separate=True,num_mutation_pathway_passes=10000,
-    write_opt_file_name='Single_State_Optimization_10000passes.txt',
-    pdf_output_plot='Single_State_Optimization_Plots_10000passes.pdf')
