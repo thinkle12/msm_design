@@ -857,18 +857,5 @@ def STF(a,z):
         return 0
 
 
-trial = SGD_Static(pdbfile='C:/Users/Trent/Desktop/PythonFiles/Project/Package/State0.pdb',
-            sequence_energy_file='C:/Users/Trent/Desktop/PythonFiles/Project/ubiquitin_State0_energies_amber_test.txt',
-            sequence_alignment_file='C:/Users/Trent/Desktop/PythonFiles/Project/smallalignment.txt',
-            wt_seq='MQIFVKTLTGKTITLEVEPSDTIENVKAKIQDKEGIPPDQQRLIFAGKQLEDGRTLSDYNIQKESTLHLVLRLRGG',
-            gamma_multiplier=1,regular_linear_regression=True,lasso=False,
-            ridge=False,ridge_coef=.0001,lambda_lasso_coef=.0001,pair_select_list=False,pair_dist=3)
-#
-trial.static_model(model_output_text_file=False)
 
-#trial = SGD_Online(pdbfile='State0.pdb',sequence_alignment='smallalignment.txt',
-#                   wt_seq='MQIFVKTLTGKTITLEVEPSDTIENVKAKIQDKEGIPPDQQRLIFAGKQLEDGRTLSDYNIQKESTLHLVLRLRGG',
-#                  custom_tag="CLASSTEST",pair_select_list=True,pair_dist=2)
-#trial.online_model(num_mutations=20,energy_scoring_function='rosetta',max_computation_time=252000,max_training_sets=200,mad_cutoff=2)
-#
 
