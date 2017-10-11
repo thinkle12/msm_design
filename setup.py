@@ -14,6 +14,5 @@ setup(
     author='Trent Hinkle',
     author_email='trenth12@gmail.com',
     url='https://github.com/thinkle12/msm_design/',
-    packages = ['msm_design'],
-    scripts = ['Msm_Design_Runner.py']
+    packages = ['msm_design']
     )
