@@ -6,6 +6,13 @@ Created on Mon Aug 22 13:56:32 2016
 @author: Trent
 """
 
+from random import choice
+from subprocess import Popen
+import numpy
+import random
+import time
+from sys import stdout
+
 class SGD_Static:
     
     def __init__(self,pdbfile,sequence_energy_file,wt_seq,sequence_alignment_file=False,reduce_alignment=1,pair_select_list=False,pair_dist=4,gamma_multiplier=2,regular_linear_regression=True,lasso=False,lambda_lasso_coef=.01,ridge=False,ridge_coef=.01,custom_tag=False):
@@ -45,12 +52,9 @@ class SGD_Static:
             raise ValueError('Cannot use regular, ridge, and lasso regression at the same time, select one or the other')
         
         
-        import numpy
-        from sys import stdout
-        import time
+
         starttime = time.time()
 
-        import time
         
         #max_time = 252000
         max_time = 5000000
@@ -68,6 +72,8 @@ class SGD_Static:
             pdbtag = self.pdbfile
         if self.custom_tag:
              pdbtag = self.custom_tag
+             
+        print('Filename Tag will be = '+str(pdbtag))
             
         
         L = len(self.wt_seq) # the length of the protein
@@ -239,7 +245,14 @@ class SGD_Static:
 
 class SGD_Online:
     
-    def __init__(self,wt_seq,pdbfile,sequence_alignment_file=False,reduce_alignment=2,output_energy_file=False,custom_tag=False,pair_select_list=False,pair_dist=4,gamma_multiplier=2,regular_linear_regression=True,lasso=False,lambda_lasso_coef=.01,ridge=False,ridge_coef=.01,output_cc=True,output_mad=True):
+    def __init__(self,wt_seq,pdbfile,sequence_alignment_file=False,reduce_alignment=2,output_energy_file=False,
+                 custom_tag=False,pair_select_list=False,pair_dist=4,gamma_multiplier=2,
+                 regular_linear_regression=True,lasso=False,lambda_lasso_coef=.01,ridge=False,
+                 ridge_coef=.01,output_cc=True,output_mad=True,
+                 rosetta_score_path='/home/romeroroot/code/rosetta_src_2016.17.58663_bundle/main/source/bin/',
+                 rosetta_database_path='/home/romeroroot/code/rosetta_src_2016.17.58663_bundle/main/database'):
+                     
+                     
         'Takes in a pdb file, sequence alignment file, wild type sequence, and energy scoring script'
         'We provide two scoring scripts score_sequence_amber.py and score_sequence_rosetta.py'
         'The rosetta script requires rosetta protein structure software'
@@ -265,7 +278,8 @@ class SGD_Online:
         self.reduce_alignment = reduce_alignment
         self.pair_dist=pair_dist
         self.sequence_alignment_file=sequence_alignment_file
-        
+        self.rosetta_score_path = rosetta_score_path
+        self.rosetta_database_path = rosetta_database_path
 
 
     def online_model(self,energy_scoring_function='rosetta',num_mutations=4,max_computation_time=252000,max_training_sets=50000,mad_cutoff=1,w_start_file=False):
@@ -283,15 +297,10 @@ class SGD_Online:
             raise ValueError('Cannot use regular, ridge, and lasso regression at the same time, select one or the other')
         
         
-        from random import choice
-        from subprocess import Popen,PIPE 
-        import numpy
-        import random
-        import time
+
         starttime = time.time()
         
         
-        import time
         
         max_time = max_computation_time
         
@@ -330,6 +339,8 @@ class SGD_Online:
             pdbtag = self.pdbfile
         if self.custom_tag:
              pdbtag = self.custom_tag
+             
+        print('Filename Tag will be = '+str(pdbtag))
             
         if self.output_energy_file:
             seqEfilename = 'ubiquitin_energies_'+str(pdbtag)+'.txt'
@@ -387,15 +398,20 @@ class SGD_Online:
                 #cmd = 'python '+str(self.energy_scoring_script)+' %s' % random_seq #1. generate a terminal command as a string
                 #output = Popen(cmd,shell=True,stdout=PIPE).communicate() #2. send the command to the terminal shell
                 #seq_E = float(output[0]) #3. read the result and convert to a float
+                
+                'Add a new energy scoring function here if wanted'
+                'Input should be random_seq and an associated pdbfile'
+                'Should create a definition similar to the two energy function definitions provided'
+                'if there is a need or want for a different energy function' 
                 if energy_scoring_function=='amber':
                     seq_E = score_sequence_amber(random_seq,pdbfile=self.pdbfile,
-                                                   rosetta_path = '/home/romeroroot/code/rosetta_src_2016.17.58663_bundle/main/source/bin/',
-                                                   rosetta_db = '/home/romeroroot/code/rosetta_src_2016.17.58663_bundle/main/database')          
+                                                   rosetta_path = self.rosetta_score_path,
+                                                   rosetta_db = self.rosetta_database_path)          
                 
                 if energy_scoring_function=='rosetta':
                     seq_E = score_sequence_rosetta(random_seq,pdbfile=self.pdbfile,
-                                                   rosetta_path = '/home/romeroroot/code/rosetta_src_2016.17.58663_bundle/main/source/bin/',
-                                                   rosetta_db = '/home/romeroroot/code/rosetta_src_2016.17.58663_bundle/main/database')          
+                                                   rosetta_path = self.rosetta_score_path,
+                                                   rosetta_db = self.rosetta_database_path)          
                 
                 
                 #This bypasses Amber not returning scores for certain sequences
@@ -519,7 +535,6 @@ class SGD_Online:
 def score_sequence_amber(newseq=None,pdbfile=None,rosetta_path = '/home/romeroroot/code/rosetta_src_2016.17.58663_bundle/main/source/bin/',rosetta_db = '/home/romeroroot/code/rosetta_src_2016.17.58663_bundle/main/database'):   
     'Provide rosetta path to fixbb.linuxgccrelease'
     from random import choice
-    from subprocess import Popen
     from os import remove
     import simtk.openmm.app as app
     import simtk.openmm as op
@@ -673,13 +688,11 @@ def score_sequence_rosetta(newseq,pdbfile,rosetta_path = '/home/romeroroot/code/
             remove(pdbname)
             return score
 
-    pdbfile = 'State0.pdb'
     score = fast_thread_repack_score(pdbfile,newseq)
     return score['total_score']
 
 
 def pair_select(pdbfile,dist,wt_seq):
-    import numpy
     "Here we select the maximum distance for a pair of AAs to be considered important"
     angstrom_distance = dist
     #########################################################################
