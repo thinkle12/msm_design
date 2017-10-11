@@ -15,5 +15,5 @@ setup(
     author_email='trenth12@gmail.com',
     url='https://github.com/thinkle12/msm_design/',
     packages = ['msm_design','scripts'],
-    data_files=[('data', ['data/*'])]
+    package_data={}
     )
