@@ -1,3 +1,5 @@
 # Include the data files
 recursive-include data *
 
+# Include the test runner script
+recursive-include scripts *
