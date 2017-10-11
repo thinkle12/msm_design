@@ -9,11 +9,11 @@ from setuptools import setup
 
 setup(
     name='msm_design',
-    version='0.3',
+    version='0.4',
     description='Markov State Modeling Protein Design Package utilizing Machine Learning and Brute Force Optimization of a specified conformational state of a protein',
     author='Trent Hinkle',
     author_email='trenth12@gmail.com',
     url='https://github.com/thinkle12/msm_design/',
     packages = ['msm_design','scripts'],
-    package_data={}
+    include_package_data = True
     )
