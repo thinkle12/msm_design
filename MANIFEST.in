@@ -1,6 +1,7 @@
 # Include the data files
-recursive-include data *
-recursive include msm_design/data *
+recursive-include msm_design/data *
+recursive include msm_design/data/pdb_files *
+recursive include msm_design/data/model_files *
 
 # Include the test runner script
 # recursive-include scripts *
