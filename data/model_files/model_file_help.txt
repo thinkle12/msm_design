@@ -1,1 +1,0 @@
-Here are sample model files that are used to run optimization methods from Msm_Design_Optimization.py
