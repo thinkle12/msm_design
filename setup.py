@@ -9,7 +9,7 @@ from setuptools import setup
 
 setup(
     name='msm_design',
-    version='0.2',
+    version='0.3',
     description='Markov State Modeling Protein Design Package utilizing Machine Learning and Brute Force Optimization of a specified conformational state of a protein',
     author='Trent Hinkle',
     author_email='trenth12@gmail.com',
