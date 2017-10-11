@@ -13,7 +13,7 @@ setup(
     description='Markov State Modeling Protein Design Package utilizing Machine Learning and Brute Force Optimization of a specified conformational state of a protein,
     author='Trent Hinkle',
     author_email='trenth12@gmail.com',
-    url='https://github.com/thinkle12/msm_design/msm_design',
+    url='https://github.com/thinkle12/msm_design/',
     packages = ['msm_design'],
     scripts = ['Msm_Design_Runner.py']
     )
