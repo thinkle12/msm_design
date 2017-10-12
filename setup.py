@@ -17,15 +17,18 @@ setup(
     packages = ['msm_design'],
     package_data = {
     # If any package contains *.txt or *.rst files, include them:
-    'msm_design/data': ['Msm_Design_Runner.py','smallalignment.txt',
-                      'ubiquitin_State0_energies_amber_4positionmutations_top4AA.txt',
-                      'ubiquitin_State0_energies_rosetta_4positionmutations_top4AA.txt'],
-        'msm_design/data/model_files':['w_nopairnoweight_State0.txt','w_nopairnoweight_State1.txt',
-                                      'w_nopairnoweight_State2.txt','w_nopairnoweight_State3.txt',
-                                      'w_nopairnoweight_State4.txt','w_nopairnoweight_State5.txt',
-                                      'w_nopairnoweight_State6.txt','w_nopairnoweight_State7.txt',
-                                       'w_nopairnoweight_State8.txt','w_nopairnoweight_State9.txt'],
-        'msm_design/data/pdb_files':['State0.pdb','State1.pdb','State2.pdb','State3.pdb','State4.pdb',
-                                    'State5.pdb','State6.pdb','State7.pdb','State8.pdb','State9.pdb']
+    'msm_design/data': ['msm_design/data/Msm_Design_Runner.py','msm_design/data/smallalignment.txt',
+                      'msm_design/data/ubiquitin_State0_energies_amber_4positionmutations_top4AA.txt',
+                      'msm_design/data/ubiquitin_State0_energies_rosetta_4positionmutations_top4AA.txt'],
+        'msm_design/data/model_files':['msm_design/data/model_files/w_nopairnoweight_State0.txt','msm_design/data/model_files/w_nopairnoweight_State1.txt',
+                                      'msm_design/data/model_files/w_nopairnoweight_State2.txt','msm_design/data/model_files/w_nopairnoweight_State3.txt',
+                                      'msm_design/data/model_files/w_nopairnoweight_State4.txt','msm_design/data/model_files/w_nopairnoweight_State5.txt',
+                                      'msm_design/data/model_files/w_nopairnoweight_State6.txt','msm_design/data/model_files/w_nopairnoweight_State7.txt',
+                                       'msm_design/data/model_files/w_nopairnoweight_State8.txt','msm_design/data/model_files/w_nopairnoweight_State9.txt'],
+        'msm_design/data/pdb_files':['msm_design/data/pdb_files/State0.pdb','msm_design/data/pdb_files/State1.pdb',
+                                     'msm_design/data/pdb_files/State2.pdb','msm_design/data/pdb_files/State3.pdb',
+                                     'msm_design/data/pdb_files/State4.pdb','msm_design/data/pdb_files/State5.pdb',
+                                     'msm_design/data/pdb_files/State6.pdb','msm_design/data/pdb_files/State7.pdb',
+                                     'msm_design/data/pdb_files/State8.pdb','msm_design/data/pdb_files/State9.pdb']
         }
     )
