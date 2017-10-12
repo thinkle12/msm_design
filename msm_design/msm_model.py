@@ -390,7 +390,7 @@ class SGD_Online:
                 wtlist = [wildtype[i] for i in range(len(wildtype))]
                 randAAlist = []
                 for i in range(num_mutations):
-                    randAAlist.append(random.randint(0,75))
+                    randAAlist.append(random.randint(0,L-1))
                 for mutantpositions in randAAlist:
                     wtlist[mutantpositions] = choice(overall_solution_space[mutantpositions])
                 random_seq = ''.join(wtlist)
