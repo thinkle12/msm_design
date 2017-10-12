@@ -18,7 +18,8 @@ setup(
     include_package_data=True,
     package_data = {
     # If any package contains *.txt or *.rst files, include them:
-    'msm_design/data': ['msm_design/data/Msm_Design_Runner.py','msm_design/data/smallalignment.txt',
+    'msm_design/data': ['msm_design/data/Energy_Generate_Script.py'
+                      'msm_design/data/Msm_Design_Runner.py','msm_design/data/smallalignment.txt',
                       'msm_design/data/ubiquitin_State0_energies_amber_4positionmutations_top4AA.txt',
                       'msm_design/data/ubiquitin_State0_energies_rosetta_4positionmutations_top4AA.txt'],
         'msm_design/data/model_files':['msm_design/data/model_files/w_nopairnoweight_State0.txt','msm_design/data/model_files/w_nopairnoweight_State1.txt',
