@@ -15,6 +15,7 @@ setup(
     author_email='trenth12@gmail.com',
     url='https://github.com/thinkle12/msm_design/',
     packages = ['msm_design'],
+    include_package_data=True,
     package_data = {
     # If any package contains *.txt or *.rst files, include them:
     'msm_design/data': ['msm_design/data/Msm_Design_Runner.py','msm_design/data/smallalignment.txt',
