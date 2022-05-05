@@ -14,6 +14,20 @@ import time
 from sys import stdout
 
 class SGD_Static:
+    """
+    Test header
+
+    Attributes:
+        scored (bool): test score arg
+
+    Returns:
+        list: test list return
+
+    Example:
+        >>> data = SGD_Static()
+        >>> output = data.do_something()
+    """
+
     
     def __init__(self,pdbfile,sequence_energy_file,wt_seq,sequence_alignment_file=False,reduce_alignment=1,pair_select_list=False,pair_dist=4,gamma_multiplier=2,regular_linear_regression=True,lasso=False,lambda_lasso_coef=.01,ridge=False,ridge_coef=.01,custom_tag=False):
         self.pdbfile = pdbfile
@@ -827,6 +841,7 @@ def import_sequence_alignment(seq_align_file,reduce_alignment,seq_len):
             return overall_solution_space
     else:
         AAs = ['A', 'C', 'D', 'E', 'F', 'G', 'H','I', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W','Y'] #all 20 amino acids
+        overall_solution_space = []
         for i in range(len(seq_len)):
             overall_solution_space.append(AAs)
         return overall_solution_space

@@ -15,7 +15,7 @@ from sys import stdout
 import random
 import math
 
-import msm_model
+from msm_design import msm_model
 
 
 #Optimization for pairs is not yet supported
@@ -104,10 +104,10 @@ class Sequence_Optimization:
                             thousandlist.append(floatedlist[-i])
                         sumlist.append([sum(thousandlist)/1000])
                 sumlist[-1].append(str(filelist[j]))
-            print sumlist
+            print(sumlist)
             return sumlist
         else:
-            print 'No MAD Directory Set'
+            print('No MAD Directory Set')
             
     def generate_seq_energy(self,seq,state_number):
         'Pair models not yet supported'
@@ -137,7 +137,7 @@ class Sequence_Optimization:
         rnd_list = []
         for j in range(len(seq)):
             if seq[j] not in overall_solution_space[j]:
-                print 'Residue '+str(seq[j])+' at position '+str(j)+' not in amino acid space '+str(overall_solution_space[j])
+                print('Residue '+str(seq[j])+' at position '+str(j)+' not in amino acid space '+str(overall_solution_space[j]))
                 rnd_list.append(j)                
                 break
 
@@ -159,7 +159,7 @@ class Sequence_Optimization:
         
         
         if self.mad_file_dir:
-            print self.test_model_performance()
+            print(self.test_model_performance())
         else:
             pass
         
@@ -177,7 +177,7 @@ class Sequence_Optimization:
         # this is the amino acids allowed at each postion
 
         overall_solution_space = msm_model.import_sequence_alignment(self.sequence_alignment_file,self.reduce_alignment,L)
-        print overall_solution_space        
+        print(overall_solution_space     )
         wildtype = self.wt_seq
         wtlist = [wildtype[i] for i in range(len(wildtype))]
         reference_seq = wtlist
@@ -191,7 +191,7 @@ class Sequence_Optimization:
         def binary_conversion(sequence):
             seq_Phi = [1] 
             for i in range(L):
-                Phi_i = Msm_Design.sigma2Phi(sequence[i],i,overall_solution_space,reference_seq)
+                Phi_i = msm_model.sigma2Phi(sequence[i],i,overall_solution_space,reference_seq)
                 seq_Phi.extend(Phi_i)
 #                for pair in position_pairs:
 #                    firstpos = pair[0]
@@ -242,7 +242,7 @@ class Sequence_Optimization:
             pp = PdfPages(pdf_output_plot)
         for state_num in states_to_optimize_for_by_state_number:
             chosen_state = 'State'+str(state_num)
-            print chosen_state
+            print(chosen_state)
             rand_seq_list = []
             boltz_list = []
             objective_func_sequence_dict = {}
@@ -329,7 +329,7 @@ class Sequence_Optimization:
                     best_seq_perstate_permutnum[str(chosen_state)].append(max(objective_func_sequence_dict['Mutations_'+str(muts)]))
                 except ValueError:
                     pass
-            print '\n'
+            print('\n')
 
             
 
@@ -395,7 +395,7 @@ class Sequence_Optimization:
         
         
         if self.mad_file_dir:
-            print self.test_model_performance()
+            print(self.test_model_performance())
         else:
             pass
         
@@ -484,8 +484,8 @@ class Sequence_Optimization:
             state_num2 = states_to_optimize_for_by_state_number[jj][1]
             chosen_state1 = 'State'+str(state_num1)
             chosen_state2 = 'State'+str(state_num2)
-            print chosen_state1
-            print chosen_state2
+            print(chosen_state1)
+            print(chosen_state2)
             two_state_opt_list = []
             boltz_list1 = []
             boltz_list2 = []
@@ -572,7 +572,7 @@ class Sequence_Optimization:
                         stdout.write('\rMutation Pathway Number = %s' % str(nn+1)) #This prints the current training set index on same line as an update
                         stdout.flush()
             
-            print '\n'            
+            print('\n')
             overall.append(trial)
             best_seq_perstate_permutnum[str(chosen_state1)+'_'+str(chosen_state2)] = []
             for muts in range(L-mutation_threshold+1):
@@ -621,7 +621,7 @@ class Sequence_Optimization:
 
         self.best_results=best_seq_perstate_permutnum
         
-        print '\n' 
+        print('\n')
 
         
         
