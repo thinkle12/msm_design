@@ -1,0 +1,10 @@
+site_name: Test Documentation
+nav:
+    - Home: index.md
+    - About: about.md
+    - Code Reference:
+      - Msm Model: msm_model_reference.md
+theme: readthedocs
+plugins:
+  - search
+  - mkdocstrings
